@@ -39,7 +39,6 @@ class ViewController: UIViewController {
             make.edges.equalTo(view.snp.edges)
         }
         
-        // Do any additional setup after loading the view.
     }
 
 
