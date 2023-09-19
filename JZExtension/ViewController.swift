@@ -22,9 +22,6 @@ class ViewController: UIViewController {
             print(cell.label.text!)
             cell.label.text = "selected " + "\(cell.i)"
         }
-        .numberOfSections{ _ in
-            2
-        }
         .numberOfRowsInSection { _, _ in
             5
         }
@@ -40,7 +37,9 @@ class ViewController: UIViewController {
             make.bottom.equalTo(view.snp.centerY)
         }
         
-        tableView1.jz
+        tableView1.jz.setSelf{ tableView in
+            tableView.backgroundColor = .lightGray
+        }
         .register(MyCell.self,forCellReuseIdentifier: myCellID)
         .didSelectRow { tableView, indexPath in
             let cell = tableView.cellForRow(at: indexPath) as! MyCell
@@ -65,6 +64,25 @@ class ViewController: UIViewController {
             make.top.equalTo(view.snp.centerY)
         }
         
+        let label = UITextField()
+        label.jz.setSelf { label in
+            label.text = "ajajdsja"
+            label.textColor = .yellow
+        }
+        .didChange { _ in
+            print("change")
+        }
+        .shouldReturn { _ in
+            print("return")
+            self.view.endEditing(true)
+            return true
+        }
+        
+
+        view.addSubview(label)
+        label.snp.makeConstraints { make in
+            make.center.equalTo(view)
+        }
     }
 
 

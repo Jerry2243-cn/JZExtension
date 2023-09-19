@@ -6,10 +6,14 @@
 //
 
 import UIKit
-///拓展UIResponder
-extension JerryExtension where Base: UIResponder{
+/// 拓展 UIResponder
+extension JZExtension where Base: UIResponder {
     
-    //通过传递链获取对象
+    /// 通过传递链获取对象
+    ///
+    /// - Parameters:
+    ///   - targetType: 目标对象的类型。
+    ///   - options: 用于处理目标对象的闭包。
     public func router<T>(_ targetType: T.Type, options: ((T) -> Void)?) {
         // 检查当前节点的 target 是否是 targetType 类型的实例
         if let targetSelf = self.target as? T {
