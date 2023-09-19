@@ -28,8 +28,9 @@ public extension JerryCompatible{
 
 extension NSObject:JerryCompatible {
  
-    var getClassName: String {
-        String(describing: type(of: self))
+    public var getClassName: String {
+        String(describing: self)
     }
+
 }
 
