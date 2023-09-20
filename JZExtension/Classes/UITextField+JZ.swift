@@ -23,6 +23,12 @@ fileprivate extension UITextField{
 
 extension JZExtension where Base: UITextField{
     
+    /// 设置 `UITextField` 的输入字符数限制以及字符集(可选,nil为接受任意字符)限制
+    ///
+    /// - Parameters:
+    ///   - count: 输入字符数限制。
+    ///   - acceptCharSet: 用输入字符集限制。
+    /// - Returns: 该拓展对象自身。
     @discardableResult
     func setlimit(count:Int,acceptCharSet:CharacterSetOptions? = nil) -> Self{
         var charSet = CharacterSet()

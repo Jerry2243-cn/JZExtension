@@ -69,7 +69,7 @@ class ViewController: UIViewController {
             label.placeholder = "input"
             label.textColor = .blue
         }
-        .setlimit(count: 10,acceptCharSet: [.digits, .custom(",./?"),.letters])
+        .setlimit(count: 16,acceptCharSet: .custom(",./;'[]\\"))
         .didChange { _ in
             print("change")
         }
