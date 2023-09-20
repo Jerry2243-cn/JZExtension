@@ -15,60 +15,61 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        tableView.jz
-        .register(MyCell.self,forCellReuseIdentifier: myCellID)
-        .didSelectRow { tableView, indexPath in
-            let cell = tableView.cellForRow(at: indexPath) as! MyCell
-            print(cell.label.text!)
-            cell.label.text = "selected " + "\(cell.i)"
-        }
-        .numberOfRowsInSection { _, _ in
-            5
-        }
-        .cellForRow { tableView, indexPath in
-           let cell = tableView.dequeueReusableCell(withIdentifier: myCellID) as! MyCell
-            cell.label.text = "cell \(indexPath.row)"
-            cell.i = indexPath.row
-            return cell
-        }
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { make in
-            make.left.top.right.equalTo(view)
-            make.bottom.equalTo(view.snp.centerY)
-        }
-        
-        tableView1.jz.setSelf{ tableView in
-            tableView.backgroundColor = .lightGray
-        }
-        .register(MyCell.self,forCellReuseIdentifier: myCellID)
-        .didSelectRow { tableView, indexPath in
-            let cell = tableView.cellForRow(at: indexPath) as! MyCell
-            print(cell.label.text!)
-            cell.label.text = "selected1 " + "\(cell.i)"
-        }
-        .numberOfSections{ _ in
-            2
-        }
-        .numberOfRowsInSection { _, _ in
-            2
-        }
-        .cellForRow { tableView, indexPath in
-           let cell = tableView.dequeueReusableCell(withIdentifier: myCellID) as! MyCell
-            cell.label.text = "cell1 \(indexPath.row)"
-            cell.i = indexPath.row
-            return cell
-        }
-        view.addSubview(tableView1)
-        tableView1.snp.makeConstraints { make in
-            make.left.bottom.right.equalTo(view)
-            make.top.equalTo(view.snp.centerY)
-        }
+//        tableView.jz
+//        .register(MyCell.self,forCellReuseIdentifier: myCellID)
+//        .didSelectRow { tableView, indexPath in
+//            let cell = tableView.cellForRow(at: indexPath) as! MyCell
+//            print(cell.label.text!)
+//            cell.label.text = "selected " + "\(cell.i)"
+//        }
+//        .numberOfRowsInSection { _, _ in
+//            5
+//        }
+//        .cellForRow { tableView, indexPath in
+//           let cell = tableView.dequeueReusableCell(withIdentifier: myCellID) as! MyCell
+//            cell.label.text = "cell \(indexPath.row)"
+//            cell.i = indexPath.row
+//            return cell
+//        }
+//        view.addSubview(tableView)
+//        tableView.snp.makeConstraints { make in
+//            make.left.top.right.equalTo(view)
+//            make.bottom.equalTo(view.snp.centerY)
+//        }
+//
+//        tableView1.jz.setSelf{ tableView in
+//            tableView.backgroundColor = .lightGray
+//        }
+//        .register(MyCell.self,forCellReuseIdentifier: myCellID)
+//        .didSelectRow { tableView, indexPath in
+//            let cell = tableView.cellForRow(at: indexPath) as! MyCell
+//            print(cell.label.text!)
+//            cell.label.text = "selected1 " + "\(cell.i)"
+//        }
+//        .numberOfSections{ _ in
+//            2
+//        }
+//        .numberOfRowsInSection { _, _ in
+//            2
+//        }
+//        .cellForRow { tableView, indexPath in
+//           let cell = tableView.dequeueReusableCell(withIdentifier: myCellID) as! MyCell
+//            cell.label.text = "cell1 \(indexPath.row)"
+//            cell.i = indexPath.row
+//            return cell
+//        }
+//        view.addSubview(tableView1)
+//        tableView1.snp.makeConstraints { make in
+//            make.left.bottom.right.equalTo(view)
+//            make.top.equalTo(view.snp.centerY)
+//        }
         
         let label = UITextField()
         label.jz.setSelf { label in
-            label.text = "ajajdsja"
-            label.textColor = .yellow
+            label.placeholder = "input"
+            label.textColor = .blue
         }
+        .setlimit(count: 10,acceptCharSet: [.digits, .custom(",./?"),.letters])
         .didChange { _ in
             print("change")
         }
@@ -77,11 +78,28 @@ class ViewController: UIViewController {
             self.view.endEditing(true)
             return true
         }
-        
-
         view.addSubview(label)
         label.snp.makeConstraints { make in
-            make.center.equalTo(view)
+            make.center.equalTo(view).offset(-100)
+        }
+        
+        let label1 = UITextField()
+        label1.jz.setSelf { label in
+            label.placeholder = "input1"
+            label.textColor = .red
+        }
+        .setlimit(count: 10,acceptCharSet: [.letters])
+        .didChange { _ in
+            print("change")
+        }
+        .shouldReturn { _ in
+            print("return")
+            self.view.endEditing(true)
+            return true
+        }
+        view.addSubview(label1)
+        label1.snp.makeConstraints { make in
+            make.center.equalTo(view).offset(100)
         }
     }
 

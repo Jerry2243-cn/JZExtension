@@ -50,7 +50,7 @@ extension JZExtension where Base: UITableView{
     @discardableResult
     public func didSelectRow(handler: @escaping (UITableView, IndexPath) -> Void) -> Self {
         setDelegate()
-        self.target.delegateWrapper.didSelectRowHandler = handler
+        self.target.delegateWrapper.didSelectRowHandlers.append(handler)
         return self
     }
     
@@ -178,7 +178,7 @@ class JZTableViewDelegateWrapper: NSObject, UITableViewDelegate, UITableViewData
     var viewForFooterInSectionHandler: ((UITableView, Int) -> UIView?)?
     var heightForHeaderInSectionHandler: ((UITableView, Int) -> CGFloat)?
     var heightForFooterInSectionHandler: ((UITableView, Int) -> CGFloat)?
-    var didSelectRowHandler: ((UITableView, IndexPath) -> Void)?
+    var didSelectRowHandlers: [((UITableView, IndexPath) -> Void)?] = []
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return heightForRowAtHandler?(tableView, indexPath) ?? UITableView.automaticDimension
@@ -201,7 +201,9 @@ class JZTableViewDelegateWrapper: NSObject, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        didSelectRowHandler?(tableView, indexPath)
+        for handler in didSelectRowHandlers{
+            handler?(tableView,indexPath)
+        }
     }
     
     // MARK: - UITableViewDataSource
