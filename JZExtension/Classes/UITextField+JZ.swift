@@ -23,14 +23,43 @@ fileprivate extension UITextField{
 
 extension JZExtension where Base: UITextField{
     
+    ///设置水平内边距，对于已设置leftView或rightView的部分不生效
+    ///
+    /// - Parameter value: 边距的值
+    ///- Returns: 该拓展对象自身。
+    @discardableResult
+    public func setInsertsHorizontally(_ value:CGFloat) -> Self{
+        if let _ = self.target.leftView{
+          
+        }else{
+            let leftView = UIView(frame: CGRect(x: 0, y: 0, width: value, height: self.target.frame.height))
+            self.target.leftView = leftView
+            self.target.leftViewMode = .always
+        }
+        
+        if let _ = self.target.rightView{
+          
+        }else{
+            let rightView = UIView(frame: CGRect(x: 0, y: 0, width: value, height: self.target.frame.height))
+            self.target.rightView = rightView
+            self.target.rightViewMode = .always
+        }
+        
+        return self
+    }
+    
+}
+
+extension JZExtension where Base: UITextField{
+    
     /// 设置 `UITextField` 的输入字符数限制以及字符集(可选,nil为接受任意字符)限制
     ///
     /// - Parameters:
     ///   - count: 输入字符数限制。
-    ///   - acceptCharSet: 用输入字符集限制。
+    ///   - acceptCharSet: 输入字符集限制。
     /// - Returns: 该拓展对象自身。
     @discardableResult
-    func setlimit(count:Int,acceptCharSet:CharacterSetOptions? = nil) -> Self{
+    public func setlimit(count:Int,acceptCharSet:CharacterSetOptions? = nil) -> Self{
         var charSet = CharacterSet()
         if let characterSetOptions = acceptCharSet{
             
@@ -43,7 +72,7 @@ extension JZExtension where Base: UITextField{
             }
             
             if let customCharacterSet = CharacterSetOptions.customCharacterSet{
-                // 添加你的自定义字符集
+                // 添加自定义字符集
                 let customSet = CharacterSet(charactersIn: customCharacterSet)
                 charSet.formUnion(customSet)
                 CharacterSetOptions.customCharacterSet = nil

@@ -8,16 +8,10 @@
 
 import Foundation
 
-public class JZExtension<Base>{
+public struct JZExtension<Base>{
     let target:Base
     init(_ target:Base){
         self.target = target
-    }
-    
-    @discardableResult
-   public func setSelf(block:(Base) -> Void) -> Self{
-        block(target)
-        return self
     }
 }
 
@@ -40,5 +34,14 @@ extension NSObject:JZCompatible {
     
     public var classInfoString: String {
         String(describing: self)
+    }
+}
+
+extension JZExtension{
+    
+    @discardableResult
+   public func setSelf(block:(Base) -> Void) -> Self{
+        block(target)
+        return self
     }
 }

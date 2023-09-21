@@ -30,10 +30,15 @@ fileprivate extension UIView{
 
 extension JZExtension where Base:UIView{
     
-    /// 添加点击手势到视图。
+    /// 添加点击手势到视图(对UIControl不生效)
     ///
     /// - Parameter action: 点击手势触发时执行的闭包。
-    public func onTap(action: @escaping (UITapGestureRecognizer) -> Void) {
+    public func onTapGesture(action: @escaping (UITapGestureRecognizer) -> Void) {
+        
+        if self.target is UIControl{
+            return
+        }
+        
         self.target.isUserInteractionEnabled = true
         var tapGesture: UITapGestureRecognizer? = nil
         

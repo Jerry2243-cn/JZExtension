@@ -64,43 +64,36 @@ class ViewController: UIViewController {
 //            make.top.equalTo(view.snp.centerY)
 //        }
         
-        let label = UITextField()
-        label.jz.setSelf { label in
-            label.placeholder = "input"
-            label.textColor = .blue
+        let button = UIButton()
+        button.jz.setSelf { button in
+            button.setTitle("Button", for: .normal)
+            button.titleLabel?.textColor = .blue
+            button.backgroundColor = .green
+            button.setTitle("selected", for: .selected)
+            
+            view.addSubview(button)
+            button.snp.makeConstraints { make in
+                make.centerY.equalTo(view).offset(-100)
+                make.centerX.equalTo(view)
+            }
         }
-        .setlimit(count: 16,acceptCharSet: .custom(",./;'[]\\"))
-        .didChange { _ in
-            print("change")
-        }
-        .shouldReturn { _ in
-            print("return")
-            self.view.endEditing(true)
-            return true
-        }
-        view.addSubview(label)
-        label.snp.makeConstraints { make in
-            make.center.equalTo(view).offset(-100)
+        .onTouchUpInside {
+            button.backgroundColor = button.isSelected ? .red : .blue
+            button.isSelected.toggle()
         }
         
-        let label1 = UITextField()
-        label1.jz.setSelf { label in
-            label.placeholder = "input1"
-            label.textColor = .red
+        let imageView = UIImageView(image: UIImage(named: "img_mine_bill"))
+        imageView.jz.setSelf { iv in
+            view.addSubview(iv)
+            iv.snp.makeConstraints { make in
+                make.center.equalTo(view)
+            }
         }
-        .setlimit(count: 10,acceptCharSet: [.letters])
-        .didChange { _ in
-            print("change")
+        .onTapGesture { _ in
+            button.isSelected.toggle()
         }
-        .shouldReturn { _ in
-            print("return")
-            self.view.endEditing(true)
-            return true
-        }
-        view.addSubview(label1)
-        label1.snp.makeConstraints { make in
-            make.center.equalTo(view).offset(100)
-        }
+        
+        
     }
 
 
