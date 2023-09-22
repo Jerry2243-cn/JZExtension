@@ -59,7 +59,7 @@ extension JZExtension where Base: UITextField{
     ///   - acceptCharSet: 输入字符集限制。
     /// - Returns: 该拓展对象自身。
     @discardableResult
-    public func setlimit(count:Int,acceptCharSet:CharacterSetOptions? = nil) -> Self{
+    public func setLimit(count:Int,acceptCharSet:CharacterSetOptions? = nil) -> Self{
         var charSet = CharacterSet()
         if let characterSetOptions = acceptCharSet{
             
@@ -78,7 +78,7 @@ extension JZExtension where Base: UITextField{
                 CharacterSetOptions.customCharacterSet = nil
             }
         }
-        return shouldChangeCharacters { textField, range, text in
+        return shouldChangeCharacters { range, text in
             if text.count == 0 {
                 return true // 允许删除
             }
@@ -104,7 +104,7 @@ extension JZExtension where Base: UITextField{
     /// - Parameter handler: 当 `shouldClear` 代理方法被调用时执行的闭包。
     /// - Returns: 该拓展对象自身。
     @discardableResult
-    public func shouldClear(handler: @escaping (UITextField) -> Bool) -> Self {
+    public func shouldClear(handler: @escaping ZJBlockVoidToBool) -> Self {
         setDelegate()
         self.target.delegateWrapper.textFieldShouldClearHandlers.append(handler)
         return self
@@ -115,7 +115,7 @@ extension JZExtension where Base: UITextField{
     /// - Parameter handler: 当 `shouldReturn` 代理方法被调用时执行的闭包。
     /// - Returns: 该拓展对象自身。
     @discardableResult
-    public func shouldReturn(handler: @escaping (UITextField) -> Bool) -> Self {
+    public func shouldReturn(handler: @escaping ZJBlockVoidToBool) -> Self {
         setDelegate()
         self.target.delegateWrapper.textFieldShouldReturnHandlers.append(handler)
         return self
@@ -126,7 +126,7 @@ extension JZExtension where Base: UITextField{
     /// - Parameter handler: 当 `didEndEditing` 代理方法被调用时执行的闭包。
     /// - Returns: 该拓展对象自身。
     @discardableResult
-    public func didEndEditing(handler: @escaping (UITextField) -> Void) -> Self {
+    public func didEndEditing(handler: @escaping ZJBlock) -> Self {
         setDelegate()
         self.target.delegateWrapper.textFieldDidEndEditingHandlers.append(handler)
         return self
@@ -137,7 +137,7 @@ extension JZExtension where Base: UITextField{
     /// - Parameter handler: 当 `didBeginEditing` 代理方法被调用时执行的闭包。
     /// - Returns: 该拓展对象自身。
     @discardableResult
-    public func didBeginEditing(handler: @escaping (UITextField) -> Void) -> Self {
+    public func didBeginEditing(handler: @escaping ZJBlock) -> Self {
         setDelegate()
         self.target.delegateWrapper.textFieldDidBeginEditingHandlers.append(handler)
         return self
@@ -148,7 +148,7 @@ extension JZExtension where Base: UITextField{
     /// - Parameter handler: 当 `shouldEndEditing` 代理方法被调用时执行的闭包。
     /// - Returns: 该拓展对象自身。
     @discardableResult
-    public func shouldEndEditing(handler: @escaping (UITextField) -> Bool) -> Self {
+    public func shouldEndEditing(handler: @escaping ZJBlockVoidToBool) -> Self {
         setDelegate()
         self.target.delegateWrapper.textFieldShouldEndEditingHandlers.append(handler)
         return self
@@ -159,7 +159,7 @@ extension JZExtension where Base: UITextField{
     /// - Parameter handler: 当 `textFieldDidChangeSelection` 代理方法被调用时执行的闭包。
     /// - Returns: 该拓展对象自身。
     @discardableResult
-    public func didChange(handler: @escaping (UITextField) -> Void) -> Self {
+    public func didChange(handler: @escaping ZJBlock) -> Self {
         setDelegate()
         self.target.delegateWrapper.textFieldDidChangeSelectionHandlers.append(handler)
         return self
@@ -170,7 +170,7 @@ extension JZExtension where Base: UITextField{
     /// - Parameter handler: 当 `shouldBeginEditing` 代理方法被调用时执行的闭包。
     /// - Returns: 该拓展对象自身。
     @discardableResult
-    public func shouldBeginEditing(handler: @escaping (UITextField) -> Bool) -> Self {
+    public func shouldBeginEditing(handler: @escaping ZJBlockVoidToBool) -> Self {
         setDelegate()
         self.target.delegateWrapper.textFieldShouldBeginEditingHandlers.append(handler)
         return self
@@ -181,7 +181,7 @@ extension JZExtension where Base: UITextField{
     /// - Parameter handler: 当 `didEndEditing` 代理方法被调用时执行的闭包。
     /// - Returns: 该拓展对象自身。
     @discardableResult
-    public func didEndEditing(handler: @escaping (UITextField, UITextField.DidEndEditingReason) -> Void) -> Self {
+    public func didEndEditing(handler: @escaping (UITextField.DidEndEditingReason) -> Void) -> Self {
         setDelegate()
         self.target.delegateWrapper.textFieldDidEndEditingWithReasonHandlers.append(handler)
         return self
@@ -192,7 +192,7 @@ extension JZExtension where Base: UITextField{
     /// - Parameter handler: 当 `shouldChangeCharactersIn` 代理方法被调用时执行的闭包。
     /// - Returns: 该拓展对象自身。
     @discardableResult
-    public func shouldChangeCharacters(handler: @escaping (UITextField, NSRange, String) -> Bool) -> Self {
+    public func shouldChangeCharacters(handler: @escaping (NSRange, String) -> Bool) -> Self {
         setDelegate()
         self.target.delegateWrapper.textFieldShouldChangeCharactersHandlers.append(handler)
         return self
@@ -202,20 +202,20 @@ extension JZExtension where Base: UITextField{
 
 class JZTextFieldDelegateWrapper:NSObject,UITextFieldDelegate{
     
-    var textFieldShouldClearHandlers: [((UITextField) -> Bool)?] = []
-    var textFieldShouldReturnHandlers: [((UITextField) -> Bool)?] = []
-    var textFieldDidEndEditingHandlers: [((UITextField) -> Void)?] = []
-    var textFieldDidBeginEditingHandlers: [((UITextField) -> Void)?] = []
-    var textFieldShouldEndEditingHandlers: [((UITextField) -> Bool)?] = []
-    var textFieldDidChangeSelectionHandlers: [((UITextField) -> Void)?] = []
-    var textFieldShouldBeginEditingHandlers: [((UITextField) -> Bool)?] = []
-    var textFieldDidEndEditingWithReasonHandlers: [((UITextField, UITextField.DidEndEditingReason) -> Void)?] = []
-    var textFieldShouldChangeCharactersHandlers: [((UITextField, NSRange, String) -> Bool)?] = []
+    var textFieldShouldClearHandlers: [ZJBlockVoidToBool?] = []
+    var textFieldShouldReturnHandlers: [ZJBlockVoidToBool?] = []
+    var textFieldDidEndEditingHandlers: [ZJBlock?] = []
+    var textFieldDidBeginEditingHandlers: [ZJBlock?] = []
+    var textFieldShouldEndEditingHandlers: [ZJBlockVoidToBool?] = []
+    var textFieldDidChangeSelectionHandlers: [ZJBlock?] = []
+    var textFieldShouldBeginEditingHandlers: [ZJBlockVoidToBool?] = []
+    var textFieldDidEndEditingWithReasonHandlers: [((UITextField.DidEndEditingReason) -> Void)?] = []
+    var textFieldShouldChangeCharactersHandlers: [((NSRange, String) -> Bool)?] = []
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         var flag = true
         for handler in textFieldShouldClearHandlers{
-            flag = handler?(textField) ?? true && flag
+            flag = handler?() ?? true && flag
         }
         return flag
     }
@@ -223,55 +223,55 @@ class JZTextFieldDelegateWrapper:NSObject,UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         var flag = true
         for handler in textFieldShouldReturnHandlers{
-            flag = handler?(textField) ?? true && flag
+            flag = handler?() ?? true && flag
         }
         return flag
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         for handler in textFieldDidEndEditingHandlers{
-            handler?(textField)
+            handler?()
         }
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         for handler in textFieldDidBeginEditingHandlers{
-            handler?(textField)
+            handler?()
         }
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         var flag = true
         for handler in textFieldShouldEndEditingHandlers{
-            flag = handler?(textField) ?? true && flag
+            flag = handler?() ?? true && flag
         }
         return flag
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
         for handler in textFieldDidChangeSelectionHandlers{
-            handler?(textField)
+            handler?()
         }
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         var flag = true
         for handler in textFieldShouldBeginEditingHandlers{
-            flag = handler?(textField) ?? true && flag
+            flag = handler?() ?? true && flag
         }
         return flag
     }
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         for handler in textFieldDidEndEditingWithReasonHandlers{
-            handler?(textField,reason)
+            handler?(reason)
         }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var flag = true
         for handler in textFieldShouldChangeCharactersHandlers{
-            flag = handler?(textField, range, string) ?? true && flag
+            flag = handler?(range, string) ?? true && flag
         }
         return flag
     }

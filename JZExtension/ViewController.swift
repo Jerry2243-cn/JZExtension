@@ -17,22 +17,22 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
         tableView.jz
         .register(MyCell.self,forCellReuseIdentifier: myCellID)
-        .didSelectRow { tableView, indexPath in
+        .didSelectRowAt { [unowned self] indexPath in
             let cell = tableView.cellForRow(at: indexPath) as! MyCell
             print(cell.label.text!)
             cell.label.text = "selected " + "\(cell.i)"
         }
-        .numberOfRowsInSection { _, _ in
+        .numberOfRowsInSection { _ in
             5
         }
-        .cellForRow { tableView, indexPath in
+        .cellForRowAt { [unowned self] indexPath in
            let cell = tableView.dequeueReusableCell(withIdentifier: myCellID) as! MyCell
             cell.label.text = "cell \(indexPath.row)"
             cell.i = indexPath.row
             return cell
         }
-        .scrollViewDidScroll { scrollView in
-            print(scrollView.bounds.maxY)
+        .scrollViewDidScroll { [unowned self] in
+            print(tableView.bounds.maxY)
         }
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
@@ -44,18 +44,18 @@ class ViewController: UIViewController {
             tableView.backgroundColor = .lightGray
         }
         .register(MyCell.self,forCellReuseIdentifier: myCellID)
-        .didSelectRow { tableView, indexPath in
+        .didSelectRowAt { [unowned self] indexPath in
             let cell = tableView.cellForRow(at: indexPath) as! MyCell
             print(cell.label.text!)
             cell.label.text = "selected1 " + "\(cell.i)"
         }
-        .numberOfSections{ _ in
+        .numberOfSections{
             1
         }
-        .numberOfRowsInSection { _, _ in
+        .numberOfRowsInSection { _ in
             2
         }
-        .cellForRow { tableView, indexPath in
+        .cellForRowAt { [unowned self] indexPath in
            let cell = tableView.dequeueReusableCell(withIdentifier: myCellID) as! MyCell
             cell.label.text = "cell1 \(indexPath.row)"
             cell.i = indexPath.row

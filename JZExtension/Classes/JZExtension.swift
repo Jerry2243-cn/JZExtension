@@ -45,3 +45,8 @@ extension JZExtension{
         return self
     }
 }
+
+public typealias ZJBlock = () -> Void
+public typealias ZJBlockVoidToBool = () -> Bool
+public typealias ZJBlockVoidToInt = () -> Int
+public typealias ZJBlockVoidToString = () -> String

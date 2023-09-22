@@ -35,7 +35,7 @@ extension JZExtension where Base: UIScrollView{
     // MARK: - UIScrollViewDelegate
       
       @discardableResult
-      public func scrollViewDidScroll(handler: @escaping (UIScrollView) -> Void) -> Self {
+      public func scrollViewDidScroll(handler: @escaping ZJBlock) -> Self {
           setDelegate()
           if let wapper = target.delegate as? JZScrollViewDelegateWrapper{
               wapper.didScrollHandlers.append(handler)
@@ -44,7 +44,7 @@ extension JZExtension where Base: UIScrollView{
       }
       
       @discardableResult
-      public func scrollViewDidZoom(handler: @escaping (UIScrollView) -> Void) -> Self {
+      public func scrollViewDidZoom(handler: @escaping ZJBlock) -> Self {
           setDelegate()
           if let wapper = target.delegate as? JZScrollViewDelegateWrapper{
               wapper.didZoomHandlers.append(handler)
@@ -53,7 +53,7 @@ extension JZExtension where Base: UIScrollView{
       }
       
       @discardableResult
-      public func scrollViewWillBeginDragging(handler: @escaping (UIScrollView) -> Void) -> Self {
+      public func scrollViewWillBeginDragging(handler: @escaping ZJBlock) -> Self {
           setDelegate()
           if let wapper = target.delegate as? JZScrollViewDelegateWrapper{
               wapper.willBeginDraggingHandlers.append(handler)
@@ -62,7 +62,7 @@ extension JZExtension where Base: UIScrollView{
       }
       
       @discardableResult
-      public func scrollViewWillEndDragging(handler: @escaping (UIScrollView, CGPoint, UnsafeMutablePointer<CGPoint>) -> Void) -> Self {
+      public func scrollViewWillEndDragging(handler: @escaping (CGPoint, UnsafeMutablePointer<CGPoint>) -> Void) -> Self {
           setDelegate()
           if let wapper = target.delegate as? JZScrollViewDelegateWrapper{
               wapper.willEndDraggingHandlers.append(handler)
@@ -75,34 +75,34 @@ class JZScrollViewDelegateWrapper:NSObject,UIScrollViewDelegate{
     
     // MARK: - UIScrollViewDelegate Handlers
        
-       var didScrollHandlers: [((UIScrollView) -> Void)?] = []
-       var didZoomHandlers: [((UIScrollView) -> Void)?] = []
-       var willBeginDraggingHandlers: [((UIScrollView) -> Void)?] = []
-       var willEndDraggingHandlers: [((UIScrollView, CGPoint, UnsafeMutablePointer<CGPoint>) -> Void)?] = []
+       var didScrollHandlers: [ZJBlock?] = []
+       var didZoomHandlers: [ZJBlock?] = []
+       var willBeginDraggingHandlers: [ZJBlock?] = []
+       var willEndDraggingHandlers: [((CGPoint, UnsafeMutablePointer<CGPoint>) -> Void)?] = []
        
        // MARK: - UIScrollViewDelegate
        
        func scrollViewDidScroll(_ scrollView: UIScrollView) {
            for handler in didScrollHandlers{
-               handler?(scrollView)
+               handler?()
            }
        }
        
        func scrollViewDidZoom(_ scrollView: UIScrollView) {
            for handler in didZoomHandlers{
-               handler?(scrollView)
+               handler?()
            }
        }
        
        func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
            for handler in willBeginDraggingHandlers{
-               handler?(scrollView)
+               handler?()
            }
        }
        
        func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
            for handler in willEndDraggingHandlers{
-               handler?(scrollView, velocity, targetContentOffset)
+               handler?(velocity, targetContentOffset)
            }
        }
 }

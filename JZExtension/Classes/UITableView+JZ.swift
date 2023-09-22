@@ -51,7 +51,7 @@ extension JZExtension where Base: UITableView{
     /// - Parameter handler: 点击Cell回调。
     /// - Returns: 当前扩展对象。
     @discardableResult
-    public func didSelectRow(handler: @escaping (UITableView, IndexPath) -> Void) -> Self {
+    public func didSelectRowAt(handler: @escaping (IndexPath) -> Void) -> Self {
         setDelegate()
         self.target.tableViewDelegateWrapper.didSelectRowHandlers.append(handler)
         return self
@@ -62,7 +62,7 @@ extension JZExtension where Base: UITableView{
     /// - Parameter handler: 行高的闭包回调。
     /// - Returns: 当前扩展对象。
     @discardableResult
-    public func heightForRowAt(handler: @escaping (UITableView, IndexPath) -> CGFloat) -> Self {
+    public func heightForRowAt(handler: @escaping (IndexPath) -> CGFloat) -> Self {
         setDelegate()
         self.target.tableViewDelegateWrapper.heightForRowAtHandler = handler
         return self
@@ -73,7 +73,7 @@ extension JZExtension where Base: UITableView{
     /// - Parameter handler: section 头部视图的闭包回调。
     /// - Returns: 当前扩展对象。
     @discardableResult
-    public func viewForHeaderInSection(handler: @escaping (UITableView, Int) -> UIView?) -> Self {
+    public func viewForHeaderInSection(handler: @escaping (Int) -> UIView?) -> Self {
         setDelegate()
         self.target.tableViewDelegateWrapper.viewForHeaderInSectionHandler = handler
         return self
@@ -84,7 +84,7 @@ extension JZExtension where Base: UITableView{
     /// - Parameter handler: section 尾部视图的闭包回调。
     /// - Returns: 当前扩展对象。
     @discardableResult
-    public func viewForFooterInSection(handler: @escaping (UITableView, Int) -> UIView?) -> Self {
+    public func viewForFooterInSection(handler: @escaping (Int) -> UIView?) -> Self {
         setDelegate()
         self.target.tableViewDelegateWrapper.viewForFooterInSectionHandler = handler
         return self
@@ -95,7 +95,7 @@ extension JZExtension where Base: UITableView{
     /// - Parameter handler: section 头部高度的闭包回调。
     /// - Returns: 当前扩展对象。
     @discardableResult
-    public func heightForHeaderInSection(handler: @escaping (UITableView, Int) -> CGFloat) -> Self {
+    public func heightForHeaderInSection(handler: @escaping (Int) -> CGFloat) -> Self {
         setDelegate()
         self.target.tableViewDelegateWrapper.heightForHeaderInSectionHandler = handler
         return self
@@ -106,7 +106,7 @@ extension JZExtension where Base: UITableView{
     /// - Parameter handler: section 尾部高度的闭包回调。
     /// - Returns: 当前扩展对象。
     @discardableResult
-    public func heightForFooterInSection(handler: @escaping (UITableView, Int) -> CGFloat) -> Self {
+    public func heightForFooterInSection(handler: @escaping (Int) -> CGFloat) -> Self {
         setDelegate()
         self.target.tableViewDelegateWrapper.heightForFooterInSectionHandler = handler
         return self
@@ -119,7 +119,7 @@ extension JZExtension where Base: UITableView{
     /// - Parameter handler: 每个 section 中的行数的闭包回调。
     /// - Returns: 当前扩展对象。
     @discardableResult
-    public func numberOfRowsInSection(handler: @escaping (UITableView, Int) -> Int) -> Self {
+    public func numberOfRowsInSection(handler: @escaping (Int) -> Int) -> Self {
         setDelegate()
         self.target.tableViewDelegateWrapper.numberOfRowsInSectionHandler = handler
         return self
@@ -130,7 +130,7 @@ extension JZExtension where Base: UITableView{
     /// - Parameter handler: 每个 indexPath 处的 Cell 的闭包回调。
     /// - Returns: 当前扩展对象。
     @discardableResult
-    public func cellForRow(handler: @escaping (UITableView, IndexPath) -> UITableViewCell) -> Self {
+    public func cellForRowAt(handler: @escaping (IndexPath) -> UITableViewCell) -> Self {
         setDelegate()
         self.target.tableViewDelegateWrapper.cellForRowHandler = handler
         return self
@@ -141,7 +141,7 @@ extension JZExtension where Base: UITableView{
     /// - Parameter handler: section 的数量的闭包回调。
     /// - Returns: 当前扩展对象。
     @discardableResult
-    public func numberOfSections(handler: @escaping (UITableView) -> Int) -> Self {
+    public func numberOfSections(handler: @escaping ZJBlockVoidToInt) -> Self {
         setDelegate()
         self.target.tableViewDelegateWrapper.numberOfSectionsHandler = handler
         return self
@@ -152,7 +152,7 @@ extension JZExtension where Base: UITableView{
     /// - Parameter handler: section 头部标题的闭包回调。
     /// - Returns: 当前扩展对象。
     @discardableResult
-    public func titleForHeaderInSection(handler: @escaping (UITableView, Int) -> String?) -> Self {
+    public func titleForHeaderInSection(handler: @escaping (Int) -> String?) -> Self {
         setDelegate()
         self.target.tableViewDelegateWrapper.titleForHeaderInSectionHandler = handler
         return self
@@ -163,7 +163,7 @@ extension JZExtension where Base: UITableView{
     /// - Parameter handler: section 尾部标题的闭包回调。
     /// - Returns: 当前扩展对象。
     @discardableResult
-    public func titleForFooterInSection(handler: @escaping (UITableView, Int) -> String?) -> Self {
+    public func titleForFooterInSection(handler: @escaping (Int) -> String?) -> Self {
         setDelegate()
         self.target.tableViewDelegateWrapper.titleForFooterInSectionHandler = handler
         return self
@@ -176,65 +176,65 @@ class JZTableViewDelegateWrapper: JZScrollViewDelegateWrapper, UITableViewDelega
     
     // MARK: - UITableViewDelegate
     
-    var heightForRowAtHandler: ((UITableView, IndexPath) -> CGFloat)?
-    var viewForHeaderInSectionHandler: ((UITableView, Int) -> UIView?)?
-    var viewForFooterInSectionHandler: ((UITableView, Int) -> UIView?)?
-    var heightForHeaderInSectionHandler: ((UITableView, Int) -> CGFloat)?
-    var heightForFooterInSectionHandler: ((UITableView, Int) -> CGFloat)?
-    var didSelectRowHandlers: [((UITableView, IndexPath) -> Void)?] = []
+    var heightForRowAtHandler: ((IndexPath) -> CGFloat)?
+    var viewForHeaderInSectionHandler: ((Int) -> UIView?)?
+    var viewForFooterInSectionHandler: ((Int) -> UIView?)?
+    var heightForHeaderInSectionHandler: ((Int) -> CGFloat)?
+    var heightForFooterInSectionHandler: ((Int) -> CGFloat)?
+    var didSelectRowHandlers: [((IndexPath) -> Void)?] = []
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return heightForRowAtHandler?(tableView, indexPath) ?? UITableView.automaticDimension
+        return heightForRowAtHandler?(indexPath) ?? UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return viewForHeaderInSectionHandler?(tableView, section)
+        return viewForHeaderInSectionHandler?(section)
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return viewForFooterInSectionHandler?(tableView, section)
+        return viewForFooterInSectionHandler?(section)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return heightForHeaderInSectionHandler?(tableView, section) ?? 0.0
+        return heightForHeaderInSectionHandler?(section) ?? 0.0
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return heightForFooterInSectionHandler?(tableView, section) ?? 0.0
+        return heightForFooterInSectionHandler?(section) ?? 0.0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         for handler in didSelectRowHandlers{
-            handler?(tableView,indexPath)
+            handler?(indexPath)
         }
     }
     
     // MARK: - UITableViewDataSource
     
-    var numberOfRowsInSectionHandler: ((UITableView, Int) -> Int)?
-    var cellForRowHandler: ((UITableView, IndexPath) -> UITableViewCell)?
-    var numberOfSectionsHandler: ((UITableView) -> Int)?
-    var titleForHeaderInSectionHandler: ((UITableView, Int) -> String?)?
-    var titleForFooterInSectionHandler: ((UITableView, Int) -> String?)?
+    var numberOfRowsInSectionHandler: ((Int) -> Int)?
+    var cellForRowHandler: ((IndexPath) -> UITableViewCell)?
+    var numberOfSectionsHandler: (ZJBlockVoidToInt)?
+    var titleForHeaderInSectionHandler: ((Int) -> String?)?
+    var titleForFooterInSectionHandler: ((Int) -> String?)?
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numberOfRowsInSectionHandler?(tableView, section) ?? 0
+        return numberOfRowsInSectionHandler?(section) ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return cellForRowHandler?(tableView, indexPath) ?? UITableViewCell()
+        return cellForRowHandler?(indexPath) ?? UITableViewCell()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return numberOfSectionsHandler?(tableView) ?? 1
+        return numberOfSectionsHandler?() ?? 1
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return titleForHeaderInSectionHandler?(tableView, section)
+        return titleForHeaderInSectionHandler?(section)
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return titleForFooterInSectionHandler?(tableView, section)
+        return titleForFooterInSectionHandler?(section)
     }
 }
 
