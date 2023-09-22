@@ -10,7 +10,7 @@ import UIKit
 private var jz_tableViewDelegateWrapperKey = "jz_tableViewDelegateWrapperKey"
 
 fileprivate extension UITableView {
-    var delegateWrapper: JZTableViewDelegateWrapper {
+    var tableViewDelegateWrapper: JZTableViewDelegateWrapper {
         if let existingWrapper = objc_getAssociatedObject(self, &jz_tableViewDelegateWrapperKey) as? JZTableViewDelegateWrapper {
             return existingWrapper
         } else {
@@ -24,8 +24,12 @@ fileprivate extension UITableView {
 extension JZExtension where Base: UITableView{
     
     private func setDelegate(){
-        self.target.delegate = self.target.delegateWrapper
-        self.target.dataSource = self.target.delegateWrapper
+        if self.target.delegate == nil{
+            self.target.delegate = self.target.tableViewDelegateWrapper
+        }
+        if self.target.dataSource == nil{
+            self.target.dataSource = self.target.tableViewDelegateWrapper
+        }
     }
     
     /// 注册 UITableViewCell 类型的 Cell。
@@ -36,7 +40,6 @@ extension JZExtension where Base: UITableView{
     /// - Returns: 当前扩展对象。
     @discardableResult
     public func register<T: UITableViewCell>(_ cellType: T.Type, forCellReuseIdentifier:String) -> Self {
-        setDelegate()
         self.target.register(cellType, forCellReuseIdentifier: forCellReuseIdentifier)
         return self
     }
@@ -50,7 +53,7 @@ extension JZExtension where Base: UITableView{
     @discardableResult
     public func didSelectRow(handler: @escaping (UITableView, IndexPath) -> Void) -> Self {
         setDelegate()
-        self.target.delegateWrapper.didSelectRowHandlers.append(handler)
+        self.target.tableViewDelegateWrapper.didSelectRowHandlers.append(handler)
         return self
     }
     
@@ -61,7 +64,7 @@ extension JZExtension where Base: UITableView{
     @discardableResult
     public func heightForRowAt(handler: @escaping (UITableView, IndexPath) -> CGFloat) -> Self {
         setDelegate()
-        self.target.delegateWrapper.heightForRowAtHandler = handler
+        self.target.tableViewDelegateWrapper.heightForRowAtHandler = handler
         return self
     }
     
@@ -72,7 +75,7 @@ extension JZExtension where Base: UITableView{
     @discardableResult
     public func viewForHeaderInSection(handler: @escaping (UITableView, Int) -> UIView?) -> Self {
         setDelegate()
-        self.target.delegateWrapper.viewForHeaderInSectionHandler = handler
+        self.target.tableViewDelegateWrapper.viewForHeaderInSectionHandler = handler
         return self
     }
     
@@ -83,7 +86,7 @@ extension JZExtension where Base: UITableView{
     @discardableResult
     public func viewForFooterInSection(handler: @escaping (UITableView, Int) -> UIView?) -> Self {
         setDelegate()
-        self.target.delegateWrapper.viewForFooterInSectionHandler = handler
+        self.target.tableViewDelegateWrapper.viewForFooterInSectionHandler = handler
         return self
     }
     
@@ -94,7 +97,7 @@ extension JZExtension where Base: UITableView{
     @discardableResult
     public func heightForHeaderInSection(handler: @escaping (UITableView, Int) -> CGFloat) -> Self {
         setDelegate()
-        self.target.delegateWrapper.heightForHeaderInSectionHandler = handler
+        self.target.tableViewDelegateWrapper.heightForHeaderInSectionHandler = handler
         return self
     }
     
@@ -105,7 +108,7 @@ extension JZExtension where Base: UITableView{
     @discardableResult
     public func heightForFooterInSection(handler: @escaping (UITableView, Int) -> CGFloat) -> Self {
         setDelegate()
-        self.target.delegateWrapper.heightForFooterInSectionHandler = handler
+        self.target.tableViewDelegateWrapper.heightForFooterInSectionHandler = handler
         return self
     }
     
@@ -118,7 +121,7 @@ extension JZExtension where Base: UITableView{
     @discardableResult
     public func numberOfRowsInSection(handler: @escaping (UITableView, Int) -> Int) -> Self {
         setDelegate()
-        self.target.delegateWrapper.numberOfRowsInSectionHandler = handler
+        self.target.tableViewDelegateWrapper.numberOfRowsInSectionHandler = handler
         return self
     }
     
@@ -129,7 +132,7 @@ extension JZExtension where Base: UITableView{
     @discardableResult
     public func cellForRow(handler: @escaping (UITableView, IndexPath) -> UITableViewCell) -> Self {
         setDelegate()
-        self.target.delegateWrapper.cellForRowHandler = handler
+        self.target.tableViewDelegateWrapper.cellForRowHandler = handler
         return self
     }
     
@@ -140,7 +143,7 @@ extension JZExtension where Base: UITableView{
     @discardableResult
     public func numberOfSections(handler: @escaping (UITableView) -> Int) -> Self {
         setDelegate()
-        self.target.delegateWrapper.numberOfSectionsHandler = handler
+        self.target.tableViewDelegateWrapper.numberOfSectionsHandler = handler
         return self
     }
     
@@ -151,7 +154,7 @@ extension JZExtension where Base: UITableView{
     @discardableResult
     public func titleForHeaderInSection(handler: @escaping (UITableView, Int) -> String?) -> Self {
         setDelegate()
-        self.target.delegateWrapper.titleForHeaderInSectionHandler = handler
+        self.target.tableViewDelegateWrapper.titleForHeaderInSectionHandler = handler
         return self
     }
     
@@ -162,14 +165,14 @@ extension JZExtension where Base: UITableView{
     @discardableResult
     public func titleForFooterInSection(handler: @escaping (UITableView, Int) -> String?) -> Self {
         setDelegate()
-        self.target.delegateWrapper.titleForFooterInSectionHandler = handler
+        self.target.tableViewDelegateWrapper.titleForFooterInSectionHandler = handler
         return self
     }
     
 }
 
 
-class JZTableViewDelegateWrapper: NSObject, UITableViewDelegate, UITableViewDataSource {
+class JZTableViewDelegateWrapper: JZScrollViewDelegateWrapper, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - UITableViewDelegate
     

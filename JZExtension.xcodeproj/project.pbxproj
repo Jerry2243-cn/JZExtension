@@ -8,10 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		03CB3303507115A9902E2B0A /* Pods_JZExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C81ECD052CA98078409401C /* Pods_JZExtension.framework */; };
+		6147EB682ABD32430090A914 /* UIViewController+JZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6147EB672ABD32430090A914 /* UIViewController+JZ.swift */; };
+		6147EB6A2ABD39090090A914 /* UIScrollView+JZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6147EB692ABD39090090A914 /* UIScrollView+JZ.swift */; };
 		61761DAF2AB93E100038A5C1 /* UIView+JZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61761DAE2AB93E100038A5C1 /* UIView+JZ.swift */; };
 		61761DB12AB975540038A5C1 /* UITextField+JZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61761DB02AB975540038A5C1 /* UITextField+JZ.swift */; };
 		61761DB32ABA94DA0038A5C1 /* CharacterSetOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61761DB22ABA94DA0038A5C1 /* CharacterSetOption.swift */; };
 		61FF01BD2ABBDB9F00FFC007 /* UIButton+JZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FF01BC2ABBDB9F00FFC007 /* UIButton+JZ.swift */; };
+		61FF01C42ABC2FA000FFC007 /* MyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FF01C32ABC2FA000FFC007 /* MyView.swift */; };
 		97777C4E2AB8A5FE008D5A79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97777C4D2AB8A5FE008D5A79 /* AppDelegate.swift */; };
 		97777C522AB8A5FE008D5A79 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97777C512AB8A5FE008D5A79 /* ViewController.swift */; };
 		97777C552AB8A5FF008D5A79 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97777C532AB8A5FF008D5A79 /* Main.storyboard */; };
@@ -23,10 +26,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6147EB672ABD32430090A914 /* UIViewController+JZ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+JZ.swift"; sourceTree = "<group>"; };
+		6147EB692ABD39090090A914 /* UIScrollView+JZ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+JZ.swift"; sourceTree = "<group>"; };
 		61761DAE2AB93E100038A5C1 /* UIView+JZ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+JZ.swift"; sourceTree = "<group>"; };
 		61761DB02AB975540038A5C1 /* UITextField+JZ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+JZ.swift"; sourceTree = "<group>"; };
 		61761DB22ABA94DA0038A5C1 /* CharacterSetOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSetOption.swift; sourceTree = "<group>"; };
 		61FF01BC2ABBDB9F00FFC007 /* UIButton+JZ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+JZ.swift"; sourceTree = "<group>"; };
+		61FF01C32ABC2FA000FFC007 /* MyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyView.swift; sourceTree = "<group>"; };
 		633EE6759F821A35D7EAEF3B /* Pods-JZExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JZExtension.debug.xcconfig"; path = "Target Support Files/Pods-JZExtension/Pods-JZExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		7C81ECD052CA98078409401C /* Pods_JZExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JZExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		97777C4A2AB8A5FE008D5A79 /* JZExtension.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JZExtension.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +93,7 @@
 				97777C612AB8A615008D5A79 /* Classes */,
 				97777C4D2AB8A5FE008D5A79 /* AppDelegate.swift */,
 				97777C512AB8A5FE008D5A79 /* ViewController.swift */,
+				61FF01C32ABC2FA000FFC007 /* MyView.swift */,
 				97777C532AB8A5FF008D5A79 /* Main.storyboard */,
 				97777C562AB8A600008D5A79 /* Assets.xcassets */,
 				97777C582AB8A600008D5A79 /* LaunchScreen.storyboard */,
@@ -100,11 +107,13 @@
 			children = (
 				97777C642AB8A625008D5A79 /* JZExtension.swift */,
 				97777C622AB8A625008D5A79 /* UIResponder+JZ.swift */,
+				6147EB692ABD39090090A914 /* UIScrollView+JZ.swift */,
 				97777C632AB8A625008D5A79 /* UITableView+JZ.swift */,
 				61761DAE2AB93E100038A5C1 /* UIView+JZ.swift */,
+				61FF01BC2ABBDB9F00FFC007 /* UIButton+JZ.swift */,
+				6147EB672ABD32430090A914 /* UIViewController+JZ.swift */,
 				61761DB02AB975540038A5C1 /* UITextField+JZ.swift */,
 				61761DB22ABA94DA0038A5C1 /* CharacterSetOption.swift */,
-				61FF01BC2ABBDB9F00FFC007 /* UIButton+JZ.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -234,13 +243,16 @@
 			files = (
 				97777C522AB8A5FE008D5A79 /* ViewController.swift in Sources */,
 				97777C4E2AB8A5FE008D5A79 /* AppDelegate.swift in Sources */,
+				61FF01C42ABC2FA000FFC007 /* MyView.swift in Sources */,
 				61761DB12AB975540038A5C1 /* UITextField+JZ.swift in Sources */,
 				97777C652AB8A625008D5A79 /* UIResponder+JZ.swift in Sources */,
 				97777C672AB8A625008D5A79 /* JZExtension.swift in Sources */,
 				61761DB32ABA94DA0038A5C1 /* CharacterSetOption.swift in Sources */,
 				61FF01BD2ABBDB9F00FFC007 /* UIButton+JZ.swift in Sources */,
 				61761DAF2AB93E100038A5C1 /* UIView+JZ.swift in Sources */,
+				6147EB682ABD32430090A914 /* UIViewController+JZ.swift in Sources */,
 				97777C662AB8A625008D5A79 /* UITableView+JZ.swift in Sources */,
+				6147EB6A2ABD39090090A914 /* UIScrollView+JZ.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
