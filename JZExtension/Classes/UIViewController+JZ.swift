@@ -25,3 +25,18 @@ extension JZExtension where Base: UIViewController{
    
     
 }
+
+
+extension UIViewController:UIViewControllerTransitioningDelegate{
+    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        let animate = AnimationController()
+            return animate
+        }
+        
+    public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+            let animate = AnimationController()
+            animate.option = .dismiss
+            return animate
+            
+        }
+}

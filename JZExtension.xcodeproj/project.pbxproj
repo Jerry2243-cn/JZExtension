@@ -10,6 +10,9 @@
 		03CB3303507115A9902E2B0A /* Pods_JZExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C81ECD052CA98078409401C /* Pods_JZExtension.framework */; };
 		6147EB682ABD32430090A914 /* UIViewController+JZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6147EB672ABD32430090A914 /* UIViewController+JZ.swift */; };
 		6147EB6A2ABD39090090A914 /* UIScrollView+JZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6147EB692ABD39090090A914 /* UIScrollView+JZ.swift */; };
+		6147EB712AC3C2870090A914 /* UICollectionView+JZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6147EB702AC3C2870090A914 /* UICollectionView+JZ.swift */; };
+		6147EB732AC420060090A914 /* AnimateTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6147EB722AC420060090A914 /* AnimateTransition.swift */; };
+		6147EB752AC420C30090A914 /* ViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6147EB742AC420C30090A914 /* ViewController1.swift */; };
 		61761DAF2AB93E100038A5C1 /* UIView+JZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61761DAE2AB93E100038A5C1 /* UIView+JZ.swift */; };
 		61761DB12AB975540038A5C1 /* UITextField+JZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61761DB02AB975540038A5C1 /* UITextField+JZ.swift */; };
 		61761DB32ABA94DA0038A5C1 /* CharacterSetOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61761DB22ABA94DA0038A5C1 /* CharacterSetOption.swift */; };
@@ -28,6 +31,9 @@
 /* Begin PBXFileReference section */
 		6147EB672ABD32430090A914 /* UIViewController+JZ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+JZ.swift"; sourceTree = "<group>"; };
 		6147EB692ABD39090090A914 /* UIScrollView+JZ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+JZ.swift"; sourceTree = "<group>"; };
+		6147EB702AC3C2870090A914 /* UICollectionView+JZ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+JZ.swift"; sourceTree = "<group>"; };
+		6147EB722AC420060090A914 /* AnimateTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateTransition.swift; sourceTree = "<group>"; };
+		6147EB742AC420C30090A914 /* ViewController1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController1.swift; sourceTree = "<group>"; };
 		61761DAE2AB93E100038A5C1 /* UIView+JZ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+JZ.swift"; sourceTree = "<group>"; };
 		61761DB02AB975540038A5C1 /* UITextField+JZ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+JZ.swift"; sourceTree = "<group>"; };
 		61761DB22ABA94DA0038A5C1 /* CharacterSetOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSetOption.swift; sourceTree = "<group>"; };
@@ -98,6 +104,7 @@
 				97777C562AB8A600008D5A79 /* Assets.xcassets */,
 				97777C582AB8A600008D5A79 /* LaunchScreen.storyboard */,
 				97777C5B2AB8A600008D5A79 /* Info.plist */,
+				6147EB742AC420C30090A914 /* ViewController1.swift */,
 			);
 			path = JZExtension;
 			sourceTree = "<group>";
@@ -107,13 +114,15 @@
 			children = (
 				97777C642AB8A625008D5A79 /* JZExtension.swift */,
 				97777C622AB8A625008D5A79 /* UIResponder+JZ.swift */,
+				61761DAE2AB93E100038A5C1 /* UIView+JZ.swift */,
 				6147EB692ABD39090090A914 /* UIScrollView+JZ.swift */,
 				97777C632AB8A625008D5A79 /* UITableView+JZ.swift */,
-				61761DAE2AB93E100038A5C1 /* UIView+JZ.swift */,
+				6147EB702AC3C2870090A914 /* UICollectionView+JZ.swift */,
 				61FF01BC2ABBDB9F00FFC007 /* UIButton+JZ.swift */,
 				6147EB672ABD32430090A914 /* UIViewController+JZ.swift */,
 				61761DB02AB975540038A5C1 /* UITextField+JZ.swift */,
 				61761DB22ABA94DA0038A5C1 /* CharacterSetOption.swift */,
+				6147EB722AC420060090A914 /* AnimateTransition.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -247,7 +256,10 @@
 				61761DB12AB975540038A5C1 /* UITextField+JZ.swift in Sources */,
 				97777C652AB8A625008D5A79 /* UIResponder+JZ.swift in Sources */,
 				97777C672AB8A625008D5A79 /* JZExtension.swift in Sources */,
+				6147EB752AC420C30090A914 /* ViewController1.swift in Sources */,
+				6147EB732AC420060090A914 /* AnimateTransition.swift in Sources */,
 				61761DB32ABA94DA0038A5C1 /* CharacterSetOption.swift in Sources */,
+				6147EB712AC3C2870090A914 /* UICollectionView+JZ.swift in Sources */,
 				61FF01BD2ABBDB9F00FFC007 /* UIButton+JZ.swift in Sources */,
 				61761DAF2AB93E100038A5C1 /* UIView+JZ.swift in Sources */,
 				6147EB682ABD32430090A914 /* UIViewController+JZ.swift in Sources */,

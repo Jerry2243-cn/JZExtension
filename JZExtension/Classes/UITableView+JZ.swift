@@ -23,6 +23,38 @@ fileprivate extension UITableView {
 
 extension JZExtension where Base: UITableView{
     
+    @discardableResult
+    func addElements<Element,Cell:UITableViewCell>(_ elements:[Element], cell:Cell.Type, cellNibName:String? = nil, row:@escaping (Element,Cell,Int) -> Void, didSelectRow:@escaping(Cell,Int) -> Void) -> Self{
+        
+        let cellIdentifier = "\(Element.self).\(Cell.self)"
+        register(Cell.self, forCellReuseIdentifier: cellIdentifier)
+            .numberOfSections {
+                1
+            }
+            .numberOfRowsInSection { _ in
+                elements.count
+            }
+            .cellForRowAt { indexPath in
+               let cell = target.dequeueReusableCell(withIdentifier: cellIdentifier) as! Cell
+                row(elements[indexPath.row], cell, indexPath.row)
+                return cell
+            }
+            .didSelectRowAt { indexPath in
+                target.deselectRow(at: indexPath, animated: true)
+                let cell = target.cellForRow(at: indexPath) as! Cell
+                didSelectRow(cell, indexPath.row)
+            }
+        
+        return self
+    }
+    
+}
+
+
+
+
+extension JZExtension where Base: UITableView{
+    
     private func setDelegate(){
         if self.target.delegate == nil{
             self.target.delegate = self.target.tableViewDelegateWrapper
