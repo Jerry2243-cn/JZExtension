@@ -46,7 +46,7 @@ extension JZExtension{
     }
 }
 
-public typealias ZJBlock = () -> Void
-public typealias ZJBlockVoidToBool = () -> Bool
-public typealias ZJBlockVoidToInt = () -> Int
-public typealias ZJBlockVoidToString = () -> String
+public typealias JZBlock = () -> Void
+public typealias JZBlockVoidToBool = () -> Bool
+public typealias JZBlockVoidToInt = () -> Int
+public typealias JZBlockVoidToString = () -> String

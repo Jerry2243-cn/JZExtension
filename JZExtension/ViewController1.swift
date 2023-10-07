@@ -2,7 +2,7 @@
 //  ViewController1.swift
 //  JZExtension
 //
-//  Created by qingshan on 2023/9/27.
+//  Created by Jerry Zhu on 2023/9/27.
 //
 
 import UIKit
@@ -22,6 +22,4 @@ class ViewController1: UIViewController {
             make.center.equalTo(view)
         }
     }
-    
-
 }

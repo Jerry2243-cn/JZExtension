@@ -173,7 +173,7 @@ extension JZExtension where Base: UITableView{
     /// - Parameter handler: section 的数量的闭包回调。
     /// - Returns: 当前扩展对象。
     @discardableResult
-    public func numberOfSections(handler: @escaping ZJBlockVoidToInt) -> Self {
+    public func numberOfSections(handler: @escaping JZBlockVoidToInt) -> Self {
         setDelegate()
         self.target.tableViewDelegateWrapper.numberOfSectionsHandler = handler
         return self
@@ -245,7 +245,7 @@ class JZTableViewDelegateWrapper: JZScrollViewDelegateWrapper, UITableViewDelega
     
     var numberOfRowsInSectionHandler: ((Int) -> Int)?
     var cellForRowHandler: ((IndexPath) -> UITableViewCell)?
-    var numberOfSectionsHandler: (ZJBlockVoidToInt)?
+    var numberOfSectionsHandler: (JZBlockVoidToInt)?
     var titleForHeaderInSectionHandler: ((Int) -> String?)?
     var titleForFooterInSectionHandler: ((Int) -> String?)?
     

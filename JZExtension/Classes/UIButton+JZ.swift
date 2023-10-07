@@ -11,9 +11,9 @@ private var jz_actionsKey = "jz_actionsKey"
 
 fileprivate extension UIButton{
     
-    var jz_action: (()->Void)? {
+    var jz_action: JZBlock? {
         get {
-            return objc_getAssociatedObject(self, &jz_actionsKey) as? ()->Void
+            return objc_getAssociatedObject(self, &jz_actionsKey) as? JZBlock
         }
         set {
             objc_setAssociatedObject(self, &jz_actionsKey, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
@@ -32,7 +32,7 @@ extension JZExtension where Base: UIButton{
     /// - Parameter action: 触发点击事件的回调
     /// - Returns :对象自身
     @discardableResult
-    public func onTouchUpInside(action:@escaping () -> Void) -> Self{
+    public func onTouchUpInside(action:@escaping JZBlock) -> Self{
         
         target.jz_action = action
         

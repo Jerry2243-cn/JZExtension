@@ -2,7 +2,7 @@
 //  AnimateTransition.swift
 //  JZExtension
 //
-//  Created by qingshan on 2023/9/27.
+//  Created by Jerry Zhu on 2023/9/27.
 //
 
 import UIKit
@@ -36,7 +36,7 @@ class AnimationController: NSObject, UIViewControllerAnimatedTransitioning {
             containerView.addSubview(fromViewShotcut)
             containerView.addSubview(overlay)
             let toViewShotcut = toView.snapshotView(afterScreenUpdates: true)!
-            toViewShotcut.frame = fromView.frame
+            toViewShotcut.frame = fromView.convert(fromView.bounds, to: nil)
             containerView.addSubview(toViewShotcut)
             toViewShotcut.alpha = 0
             overlay.alpha = 0
@@ -46,7 +46,7 @@ class AnimationController: NSObject, UIViewControllerAnimatedTransitioning {
                 toViewShotcut.frame = UIScreen.main.bounds
                 fromViewShotcut.alpha = 0
                 toViewShotcut.alpha = 1
-                overlay.alpha = 0.3
+                overlay.alpha = 0.5
             }) { (completed) in
                 fromView.alpha = 1
                 toViewShotcut.removeFromSuperview()
@@ -77,10 +77,10 @@ class AnimationController: NSObject, UIViewControllerAnimatedTransitioning {
             toViewShotcut.alpha = 0
             overlay.alpha = 0
             toView.alpha = 0
-            overlay.alpha = 0.3
+            overlay.alpha = 0.5
             fromView.alpha = 0
             UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
-                fromViewShotcut.frame = toView.frame
+                fromViewShotcut.frame = toView.convert(toView.bounds, to: nil)
                 toViewShotcut.frame = toView.convert(toView.bounds, to: nil)
                 fromViewShotcut.alpha = 0
                 toViewShotcut.alpha = 1
